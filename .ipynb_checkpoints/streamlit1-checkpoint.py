@@ -15,7 +15,7 @@ def load_model(ticker):
 
 def prepare_features(df):
     features = ["Open", "High", "Low", "Close", "Volume", "Lag1", "Lag7", "SMA7", "RSI14", "MACD", "Returns", "Volatility"]
-    return df[features].values
+    return df[features]
 
 def predict_prices(model, scaler, df):
     X_scaled = scaler.transform(prepare_features(df))
@@ -67,7 +67,8 @@ st.plotly_chart(fig)
 
 # Feature Importance
 importance = model.feature_importances_
-feature_df = pd.DataFrame({"Feature": prepare_features(df).columns, "Importance": importance})
+feature_names = ["Open", "High", "Low", "Close", "Volume", "Lag1", "Lag7", "SMA7", "RSI14", "MACD", "Returns", "Volatility"]
+feature_df = pd.DataFrame({"Feature": feature_names, "Importance": importance})
 feature_df = feature_df.sort_values(by="Importance", ascending=False)
 st.write("### Feature Importance")
 st.bar_chart(feature_df.set_index("Feature"))
