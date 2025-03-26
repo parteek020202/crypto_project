@@ -5,3 +5,4 @@ matplotlib
 xgboost
 scikit-learn
 joblib
+plotly
