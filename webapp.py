@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[40]:
+# In[42]:
 
 
 import streamlit as st
@@ -24,9 +24,9 @@ days_back = st.sidebar.slider("Historical Data Period (Days)", 60, 365, 180)
 prediction_horizon = st.sidebar.number_input("Days to Forecast", min_value=1, max_value=30, value=1)
 
 # Determine filenames based on ticker (using joblib for loading)
-ticker_short = ticker.split('-')[0]
-model_filename = f"{ticker_short}_svr_model.pkl"
-scaler_filename = f"{ticker_short}_scaler_X_svr.pkl"
+
+model_filename = f"{ticker}_svr_model.pkl"
+scaler_filename = f"{ticker}_scaler_X_svr.pkl"
 
 try:
     model = joblib.load(model_filename)
