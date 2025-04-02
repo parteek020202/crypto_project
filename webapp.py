@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[46]:
-
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -96,7 +90,7 @@ with tabs[0]:
     col1.metric("Current Close", f"${current_close:.2f}")
     col2.metric("Predicted Next Close", f"${predicted_price:.2f}")
     col3.metric("Trading Signal", signal)
-    
+
     # Display a Plotly chart for historical closing prices with predicted marker
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data.index, y=data['Close'], mode='lines', name='Historical Close'))
@@ -122,7 +116,7 @@ with tabs[1]:
     fig_rsi.add_hline(y=30, line_dash="dash", line_color="green")
     fig_rsi.update_layout(title="RSI (14) over Time", yaxis_title="RSI")
     st.plotly_chart(fig_rsi, use_container_width=True)
-    
+
     st.subheader("MACD")
     fig_macd = go.Figure()
     fig_macd.add_trace(go.Scatter(x=data.index, y=data['MACD'], mode='lines', name='MACD'))
@@ -147,11 +141,9 @@ with tabs[2]:
 # Prediction History Tab
 with tabs[3]:
     st.header("Prediction History")
-    # For demonstration, let's assume you keep predictions in a DataFrame.
-    # In a real app, you'd append new predictions to a persistent storage.
     if 'pred_history' not in st.session_state:
         st.session_state.pred_history = pd.DataFrame(columns=["Date", "Actual Close", "Predicted Close", "Signal"])
-    
+
     # Save today's prediction
     today = pd.to_datetime(datetime.date.today())
     new_entry = pd.DataFrame({
@@ -161,11 +153,8 @@ with tabs[3]:
         "Signal": [signal]
     })
     st.session_state.pred_history = pd.concat([st.session_state.pred_history, new_entry], ignore_index=True)
-    
+
     st.dataframe(st.session_state.pred_history)
-
-
-
 # In[ ]:
 
 
